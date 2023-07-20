@@ -1,9 +1,12 @@
  
+import Header from './Header'
 import './Home.css'
 import Product from './Product'
 
 const Home = () => {
   return (
+     <>
+     <Header/>
       <div className='home'>
         <div className="home__container">
       
@@ -24,6 +27,8 @@ const Home = () => {
                 </div>
         </div>
     </div> 
+     
+     </>
   )
 }
 

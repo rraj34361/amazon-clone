@@ -4,15 +4,7 @@ import CurrencyFormat from 'react-currency-format'
 import { getBasketTotal } from '../reducer'
 const Subtotal = () => {
   const [{basket}, dispatch] = useStateValue()
-
-  // const paisa = (basket)=>{
-  //  const prices =  basket.map((item)=>item.price)
-  //  const sum = prices.reduce((x,y)=>x+y, 0)
-  //  console.log(sum)
-  //  return sum
-  // }
-  // onClick={()=>paisa(basket)}
-
+ 
 
   return (
     <div className="subtotal">

@@ -1,8 +1,22 @@
 import PropTypes from 'prop-types'
+import './CheckoutProduct.css'
+import { useStateValue } from './StateProvider'
+
 const CheckoutProduct = ({id , image , title , price ,symbol, rating}) => {
+
+  const [{basket}, dispatch] = useStateValue()
+
+  const removeFromBasket = ()=>{
+    //remove the item from the basket 
+
+    dispatch({
+      type : "REMOVE_FROM_BASKET",
+      id : id,
+    })
+  }
   return (
     <div className='checkoutProduct'>
-     <img className='checkoutProduct__image' src={image || "https://images-eu.ssl-images-amazon.com/images/G/31/img2020/img21/apparelGW/junatf23/unrecapay/MA_3000._CB603210873_.jpg"} alt=""   />
+     <img className='checkoutProduct__image' src={image} alt=""   />
      
      <div className="checkoutProduct__info">
         <p className='checkoutProduct__title'>{title}</p>
@@ -15,6 +29,7 @@ const CheckoutProduct = ({id , image , title , price ,symbol, rating}) => {
                 <p key={i}>⭐</p>
             ))}
         </div>
+        <button onClick={removeFromBasket}>Remove from cart</button>
      </div>
 
     </div>
@@ -27,7 +42,7 @@ CheckoutProduct.propTypes = {
     price : PropTypes.number.isRequired ,
     image : PropTypes.string.isRequired ,
     rating : PropTypes.number.isRequired, 
-    symbol : PropTypes.string.isRequired,
+    symbol : PropTypes.string,
     id : PropTypes.string.isRequired
 }
 

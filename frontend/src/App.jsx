@@ -8,9 +8,14 @@ import Register from './components/Register'
 import { useEffect } from 'react'
 import { useStateValue } from './components/StateProvider'
 import axios from '../axios.config'
+import Payment from './components/Payment'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
+import Order from './components/Order'
 
-
-
+const promise = loadStripe(
+  'pk_test_51NVvi0SFGfzmmEtspXFNaBGya9J5BM5MFPNThRpIdRc6cEvgH4Bd8A31Y4xijJeyxyvcQnK1oEO548kJTSf0k1Hb00n7jRS3TI'
+);
 
 function App() {
 
@@ -61,7 +66,9 @@ const [{basket,user},dispatch ] = useStateValue()
     <Route path = '/' element ={   <Home/>}  /> 
     <Route path='/register' element = {<Register/>}/>
     <Route path = "/login" element= {<Login/>}/>
-    <Route path = '/checkout' element = {<Checkout/>}  />       
+    <Route path = '/checkout' element = {<Checkout/>}  />  
+    <Route path='/payment' element = {<Elements stripe={promise}><Payment/></Elements>} />   
+    <Route path ='/orders' element = {<Order order = {basket}/>}  />
     </Routes>
     </>
   )

@@ -10,9 +10,9 @@ const Login = () => {
     const navigate = useNavigate()
     const signIn = async (e)=>{
     e.preventDefault();
-    e.preventDefault()
+   
     let response = await axios.post('/login',{email : email, password : password} ) 
-
+         
     console.log(response.data.data)
        localStorage.setItem('token', response.data.data.token)
        navigate('/')

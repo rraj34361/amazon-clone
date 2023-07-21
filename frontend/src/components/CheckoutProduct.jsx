@@ -1,20 +1,20 @@
 import PropTypes from 'prop-types'
 import './CheckoutProduct.css'
 import { useStateValue } from './StateProvider'
-
-const CheckoutProduct = ({id , image , title , price ,symbol, rating}) => {
+ 
+const CheckoutProduct = ({id , image , title , price ,symbol, rating, hideButton}) => {
 
   const [{basket}, dispatch] = useStateValue()
-
   const removeFromBasket = ()=>{
+    
+ dispatch({
+   type : "REMOVE_FROM_BASKET",
+   id : id,
+ })
+}
     //remove the item from the basket 
 
-    dispatch({
-      type : "REMOVE_FROM_BASKET",
-      id : id,
-    })
-  }
-  return (
+   return(
     <div className='checkoutProduct'>
      <img className='checkoutProduct__image' src={image} alt=""   />
      
@@ -29,13 +29,15 @@ const CheckoutProduct = ({id , image , title , price ,symbol, rating}) => {
                 <p key={i}>⭐</p>
             ))}
         </div>
-        <button onClick={removeFromBasket}>Remove from cart</button>
+    {!hideButton && (
+              <button onClick={removeFromBasket}>Remove from cart</button>
+
+    )}
      </div>
 
     </div>
   )
-}
-
+  }
 
 CheckoutProduct.propTypes = {
     title : PropTypes.string.isRequired ,

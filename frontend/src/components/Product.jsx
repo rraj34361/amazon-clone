@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import { useStateValue } from "./StateProvider";
 const Product = ({id , title, price ,symbol, image, rating}) => {
 
-  const [{basket}, dispatch] = useStateValue()
+  const [{basket, user}, dispatch] = useStateValue()
 
-  // console.log('this is the basket===>', basket )
+  console.log('this is the basket===>', basket )
+  console.log('this is the user===>', user )
     const addToBasket = () =>{
       //dispatch the item the data layer
       dispatch({

@@ -3,16 +3,29 @@ import './Login.css'
 import { useState } from 'react'
 // import { auth } from '../firebase'
 import axios from '../../axios.config'
+import { useStateValue } from './StateProvider'
 
 const Login = () => {
     const [email , setEmail] = useState('')
     const [password , setPassword] = useState('')
+    const [{user}, dispatch] = useStateValue()
     const navigate = useNavigate()
+    console.log(user)
     const signIn = async (e)=>{
     e.preventDefault();
    
     let response = await axios.post('/login',{email : email, password : password} ) 
-         
+         dispatch(
+            {
+                type : "SET_USER",
+                user : {
+                    email ,
+                    token : response.data.data.token,
+                    name : response.data.data.name
+                }
+            }
+         )
+
     console.log(response.data.data)
        localStorage.setItem('token', response.data.data.token)
        navigate('/')

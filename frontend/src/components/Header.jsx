@@ -9,6 +9,10 @@ const Header = () => {
 
   const handleAuth = ()=>{
     localStorage.clear()
+    dispatch({
+      type : "SET_USER",
+      user : null
+    })
     user = null
   }
   return (

@@ -1,23 +1,23 @@
 const mongoose = require('mongoose');
-const ObjectId = mongoose.Types.ObjectId;
+const objectId = mongoose.Types.ObjectId;
 
  
 const OrderSchema = new mongoose.Schema({
     userId : {
-        type: ObjectId,
+        type: objectId,
         required: true,
-        ref : "User",
+        ref : "user",
     },
     items : [
         {
             productId : {
-                type: ObjectId,
-                required: true,
+                type: objectId,
+               
                 ref : "Product",
             },
             quantity : {
                 type: Number,
-                required: true,
+                
                 min : 1
             },
         }
@@ -25,18 +25,18 @@ const OrderSchema = new mongoose.Schema({
     totalPrice : {
         type: Number,
         required: true,
-        comment : "Holds total price of all the items in the cart",
+        // comment : "Holds total price of all the items in the cart",
     },
     totalItems : {
         type: Number,
-        required: true,
-        comment : "Holds total number of items in the cart",
+    
+        // comment : "Holds total number of items in the cart",
     },
-    totalQuantity : {
-        type: Number,
-        required: true,
-        comment : "Holds total number of quantity in the cart",
-    },
+    // totalQuantity : {
+    //     type: Number,
+    
+    //     comment : "Holds total number of quantity in the cart",
+    // },
     cancellable : {
         type: Boolean,
         default: true,
@@ -55,4 +55,4 @@ const OrderSchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
-module.exports = mongoose.model('Order', OrderSchema);
+module.exports = mongoose.model('order', OrderSchema);

@@ -15,7 +15,7 @@ const createOrder = async (req, res) => {
         if (!user) {
             return res.status(404).send({ status: false, message: 'User not found' });
         }
-        if (userId !== req['x-api-key'] ) {
+        if (userId.toString() !== req['x-api-key'] ) {
             return res.status(403).send({ status: false, message: 'Unauthorized' });
         }
         if (status) {
@@ -40,6 +40,9 @@ const createOrder = async (req, res) => {
         }
 
         const order = await OrderModel.create(orderDetails);
+               user.orders.push(order._id)
+             
+               await user.save() 
         return res.status(201).send({ status: true, message: 'Order created', data: order });
 
     } catch (error) {
@@ -83,7 +86,25 @@ const updateOrder = async (req, res) => {
         return res.status(500).send({ status: false, message: error.message });
     }
 }
+
+const getOrder = async(req,res)=>{
+    try { 
+     let orderId = req.params.orderId
+     console.log('order Id ' , orderId)
+   let    orderWithProduct = await OrderModel.findById(orderId.toString()).populate('items.productId')
+      console.log(orderWithProduct.items)
+      return res.send({status : true , order : orderWithProduct.items})
+    } catch (error) {
+        console.log(error)
+    }
+}
+ 
+
+
+
+
 module.exports = {
     createOrder,
     updateOrder,
+    getOrder,
 }

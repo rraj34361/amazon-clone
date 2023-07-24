@@ -4,6 +4,7 @@ const {
   login,
   getProfile,
   updateUser,
+  profile
 } = require("../controllers/userController");
 
 const {auth} = require('../middleware/auth')
@@ -12,7 +13,7 @@ const {
 } = require('../controllers/productController')
 
 const { createCart, getCart, updateCart, cartDelete } = require('../controllers/cartController');
-const { createOrder, updateOrder } = require('../controllers/orderController');
+const { createOrder, updateOrder, getOrder } = require('../controllers/orderController');
 
 
 
@@ -22,7 +23,7 @@ router.post("/register",create);
 router.post("/login",login);
 router.get("/user/:userId/profile",getProfile);
 router.put("/user/:userId/profile",updateUser);
- 
+ router.get('/getProfile', profile)
 
 //=================product===================//
 
@@ -42,5 +43,5 @@ router.delete('/users/:userId/cart', auth, cartDelete)
 // ========================================== Order routes ======================================================
 router.post('/users/:userId/orders', auth, createOrder)
 router.put('/users/:userId/orders', auth, updateOrder)
-
+router.get('/:orderId',auth, getOrder)
 module.exports = router;

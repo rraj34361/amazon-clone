@@ -122,6 +122,7 @@ const createCart = async (req, res) => {
             return res.status(201).send({ status: true, message: 'Cart created', data: cart });
         }
     } catch (error) {
+        console.log(error.message)
           return  res.status(500).send({ status: false, message: error.message });
     }
 }

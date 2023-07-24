@@ -1,5 +1,6 @@
 const jwt= require('jsonwebtoken')
 require('dotenv').config()
+const {SECRET_KEY} = process.env
 
 function verifyToken(token, SECRET_KEY) {
     return new Promise((resolve, reject) => {
@@ -19,7 +20,7 @@ function verifyToken(token, SECRET_KEY) {
 
 const auth= async (req, res, next) => {
     try {
-        const token = req.headers['x-api-key']  ||  (req.headers["authorization"])
+        let token = req.headers['x-api-key']  ||  (req.headers["authorization"])
         if(!token){
             return res.status(401).send({
                 status: false,
@@ -45,6 +46,7 @@ const auth= async (req, res, next) => {
 verifyToken(token, SECRET_KEY)
   .then(userId => {
     req['x-api-key'] = userId;
+    console.log(typeof userId , userId)
     next();
   })
   .catch(error => {
@@ -55,6 +57,7 @@ verifyToken(token, SECRET_KEY)
   });
 
     } catch (error) {
+      console.log(error.message)
         res.status(500).send({
             status: false,
             error: error.message

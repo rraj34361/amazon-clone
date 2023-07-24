@@ -6,31 +6,21 @@ const { sizeCheck, isValid } = require('../validation/validator');
 const createProduct = async (req, res) => {
     try {
         const files = req.files;
-        let  { title, description, price, currencyId, currencyFormat, isFreeShipping, style, availableSizes, installments } = req.body;
-        if (!title || !description || !price || !currencyId || !currencyFormat || !isFreeShipping || !style   || !installments) {
-            return res.status(400).send({ status: false, message: 'Please enter all fields' });
-        }
+        let  { title,   price, rating,  symbol, isFreeShipping } = req.body;
+     
         const product = await ProductModel.findOne({ title });
         if (product) {
             return res.status(400).send({ status: false, message: 'Product Title already exists' });
         }
-        if (!availableSizes) {
-            return res.status(400).send({ status: false, message: 'Please enter valid sizes' });
-        }
+    
 
         // dikkat hai bhai
-        if (!sizeCheck((availableSizes.toUpperCase().split(',')).map(e=>e.trim()))) {
-            return res.status(400).send({ status: false, message: 'Please enter valid sizes' });
-        }
+       
         if (Number.isNaN(parseFloat(price))) {
             return res.status(400).send({ status: false, message: 'Please enter valid price' });
         }
-        if (currencyId != "INR") {
-            return res.status(400).send({ status: false, message: 'Please enter valid currency' });
-        }
-        if (currencyFormat != '₹') {
-            return res.status(400).send({ status: false, message: 'Please enter valid currency format' });
-        }
+ 
+ 
         if(!files){
             return res.status(400).send({ status: false, message: 'Please upload valid image' });
 
@@ -43,19 +33,15 @@ const createProduct = async (req, res) => {
         const productImage = await uploadFile(files[0], 'user');
 
         const productDetail = {
-            title: title,
-            description: description,
+            title: title, 
             price: price,
-            currencyId: currencyId,
-            currencyFormat: currencyFormat,
+            symbol : symbol,
+             rating : rating,
             isFreeShipping: isFreeShipping,
             productImage: productImage,
-            style: style,
-            availableSizes: (availableSizes.toUpperCase().split(',')).map(e=>e.trim()),
-            installments: installments
+          
         }
-        //  let   availableSizes = (availableSizes.toUpperCase().split(',')).map(e=>e.trim())
-        // const productDetail = {...req.body, productImage : productImage , availableSizes :availableSizes }
+ 
         const newProduct = await ProductModel.create(productDetail);
        return res.status(201).send({ status: true, message: 'Product Created', data: newProduct });
     } catch (error) {
@@ -112,6 +98,7 @@ const getProductById = async (req, res) => {
         }
         const product = await ProductModel.findOne({_id:productId, isDeleted: false}); 
         if(! product){
+            console.log("hit")
             return res.status(404).send({status: false, message: 'Product not found' });
         }
        return res.status(200).send({ status: true, message: 'Product found', data: product });

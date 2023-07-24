@@ -9,18 +9,17 @@ require('dotenv').config()
 const {SECRET_KEY} = process.env
 const {isEmail} = require('validator')
 
-const keys = ["fname", "lname", "email", "phone", "password"];
+const keys = ['name', "email", "phone", "password"];
 
 const create = async (req, res) => {
   try {
     const userData = req.body;
 
-    let { fname, lname, email,  phone, password} =
+    let {  name,  email,  phone, password} =
       userData;
-      // console.log(fname)
-      let file = req.files
-      console.log(file)
-    // console.log(profileImage)
+       
+      
+     
     for (let i = 0; i < keys.length; i++) {
       if (!isValid(userData[keys[i]])) {
         return res
@@ -28,28 +27,13 @@ const create = async (req, res) => {
           .send({ status: false, message: ` ${keys[i]} missing` });
       }
     }
-       const address = JSON.parse(req.body.address)
-
-    if (
-      !isValid(address.shipping.street) ||
-      !isValid(address.shipping.city) ||
-      !isValid(address.shipping.pincode) ||
-      !isValid(address.billing.street) ||
-      !isValid(address.billing.city) ||
-      !isValid(address.billing.pincode)
-    ) {
-      return res
-        .status(400)
-        .send({ status: false, message: "missing mandatory fields" });
-    }
-
-      req.body.address = address
-    if (!file || (file && file.length === 0)) {
-      return res.status(400).send({ status: false, message: 'Please upload profile image' });
-  }
-
+      //  const address = JSON.parse(req.body.address)
+ 
 
        // valid email
+
+
+
        if(!isEmail(email)){
         return  res.status(400).send({status:false, message: 'Please enter valid email'})
     }
@@ -86,15 +70,16 @@ const create = async (req, res) => {
     const updatedPass = await bcrypt.hash(password, salt);
 
     userData.password = updatedPass;
-      req.body.profileImage = await uploadFile(file[0])
+      
     const userDocument = await UserModel.create(userData);
 
      newUser = userDocument.toObject();
 
      delete (newUser.password)
-
+  console.log(newUser)
     return  res.status(201).send({ status: true, message: "user created", data : newUser });
   } catch (err) {
+    console.log(err.message)
     return res.status(500).send({ status: false, message: err.message });
   }
 };
@@ -121,14 +106,15 @@ const login = async (req, res) => {
          return res.status(401).send({ status: false, message: 'Invalid password' });
         }
 
-  const token = jwt.sign({ userId: user._id , iat : Math.floor(Date.now()/1000), exp : Math.floor(Date.now()/1000) }, SECRET_KEY, { expiresIn: "24h" });
-
+  const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: "24h" });
+      res.cookie("token" , token)
   return  res.status(200).send({
     status: true,
     message: "User Login Successfully",
-    data: { userId: user._id, token },
+    data: { userId: user._id, token , name : user.name },
   })
   } catch (error) {
+    console.log(error.message)
     return res.status(500).send({ status: false, message: error.message });
   }
 };
@@ -254,9 +240,28 @@ delete (objUser.password)
   }
 };
 
+
+
+const profile = async (req,res)=>{
+  token = req.headers['token']
+    
+  decoded = jwt.verify(token, SECRET_KEY)
+    user = await UserModel.findById(decoded.userId)
+   
+    let person = {
+      name : user.name,
+      email : user.email,
+      id : user._id,
+      orders : user.orders
+    }
+
+  return res.send({data : person})
+}
+
 module.exports = {
   create,
   login,
   getProfile,
   updateUser,
+  profile
 };

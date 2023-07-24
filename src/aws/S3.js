@@ -15,8 +15,8 @@ const uploadFile = async (file) => {
  console.log(file)
         let uploadParams = {
             ACL: "public-read",
-            Bucket: "classroom-training-bucket",  //HERE
-            Key: "abc/" + file.originalname, //HERE 
+            Bucket: "personal-amazon",  //HERE
+            Key: "abc/" + file.originalname + Date.now(), //HERE 
             Body: file.buffer
         }
 

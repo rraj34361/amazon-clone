@@ -8,9 +8,8 @@ import { useStateValue } from './StateProvider'
 const Login = () => {
     const [email , setEmail] = useState('')
     const [password , setPassword] = useState('')
-    const [{user}, dispatch] = useStateValue()
+    const [{user }, dispatch] = useStateValue()
     const navigate = useNavigate()
-    console.log(user)
     const signIn = async (e)=>{
     e.preventDefault();
    
@@ -45,7 +44,7 @@ const Login = () => {
         <h1>Sign-in</h1>
         <form action="">
             <h5>E-mail</h5>
-            <input value={email} onChange={e=>setEmail(e.target.value)} type="email" required />
+            <input value={email} onChange={e=>setEmail(e.target.value)} type="email" required autoFocus />
             <h5>Password</h5>
             <input value={password} onChange={e=>setPassword(e.target.value)} type="password" required />
             <button className='login__signInButton'  onClick={signIn}>Sign In</button>

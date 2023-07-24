@@ -36,7 +36,7 @@ useEffect(()=>{
   
 }, [basket])
 
-console.log(clientSecret)
+// console.log(clientSecret)
 
 const handleSubmit = async (e)=>{
    e.preventDefault()
@@ -49,6 +49,23 @@ const handleSubmit = async (e)=>{
    }).then(({paymentIntent})=>{
       //paymentIntent = payment Confirmtion
          //  console.log(paymentIntent)
+            /// add to database to users cart only;
+       const headers = {
+         // Specify the headers you want to set
+         "Authorization": `Bearer ${user?.token}`, // Example authorization header
+         "Content-Type": "application/json", // Example content type header
+         // Add more headers as needed
+       };
+            
+             //basket order detail i have to save
+            axios.post(`/users/${user?.id}/orders` ,{status : "completed"}, {headers} ).then((order)=>  //console.log(order)
+                dispatch({
+                  type:"SET_USER",
+                  user : {orders :[order?.data.data._id],...user}
+                })
+            )
+             
+
          dispatch({
             type : "EMPTY_BASKET"
          })
@@ -61,6 +78,7 @@ const handleSubmit = async (e)=>{
 }
    
 const handleChange =  (e)=>{
+   // e.preventDefault()
       //listen for changes in the cardElement
       // and display any error as the custome types their card details
       setDisabled(e.empty);
@@ -122,7 +140,7 @@ const handleChange =  (e)=>{
         value={getBasketTotal(basket)}     //home  work
         displayType= {'text'}
         thousandSeparator = { true}
-        prefix={"$"}
+        prefix={""}
         />   
         <button disabled = {processing|| disabled||succeeded} >
          <span > {processing ? <p>Processing</p> :"Buy Now" }  </span>

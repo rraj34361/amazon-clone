@@ -29,14 +29,14 @@ const Register = () => {
         <h1>Create Account</h1>
         <form >
             <h5>Your name</h5>
-            <input value={name} onChange={e=>setName(e.target.value)} type="text" required />
+            <input value={name} onChange={e=>setName(e.target.value)} type="text"  autoFocus />
             <h5>Mobile number</h5>
             <input value={phone} onChange={e=>setPhone(e.target.value)} type="text" required />
             <h5>E-mail</h5>
             <input value={email} onChange={e=>setEmail(e.target.value)} type="email" required />
             <h5>Password</h5>
             <input value={password} onChange={e=>setPassword(e.target.value)} type="password" required />
-            <p>By enrolling your mobile phone number, you consent to receive automated security notifications via text message from Amazon. Message and data rates may apply.</p>
+            <small>By enrolling your mobile phone number, you consent to receive automated security notifications via text message from Amazon. Message and data rates may apply.</small>
             <button className='login__signInButton'  onClick={register}>Continue</button>
         </form>
         <p>

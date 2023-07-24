@@ -12,6 +12,7 @@ import Payment from './components/Payment'
 import { loadStripe } from '@stripe/stripe-js'
 import { Elements } from '@stripe/react-stripe-js'
 import Order from './components/Order'
+import ProductPage from './components/ProductPage'
 
 const promise = loadStripe(
   'pk_test_51NVvi0SFGfzmmEtspXFNaBGya9J5BM5MFPNThRpIdRc6cEvgH4Bd8A31Y4xijJeyxyvcQnK1oEO548kJTSf0k1Hb00n7jRS3TI'
@@ -37,7 +38,7 @@ const [{basket,user},dispatch ] = useStateValue()
               // console.log(response.data.data)
               dispatch({
                 type : "SET_USER",
-                user : {token , name : response.data.data}
+                user : {token ,  ...response.data.data }
               })
               return response.data.data
            }
@@ -69,6 +70,7 @@ const [{basket,user},dispatch ] = useStateValue()
     <Route path = '/checkout' element = {<Checkout/>}  />  
     <Route path='/payment' element = {<Elements stripe={promise}><Payment/></Elements>} />   
     <Route path ='/orders' element = {<Order order = {basket}/>}  />
+    <Route  path='/products/:productId' element = {<ProductPage/>}/>
     </Routes>
     </>
   )

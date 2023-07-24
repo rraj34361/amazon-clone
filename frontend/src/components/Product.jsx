@@ -1,13 +1,32 @@
 import "./Product.css";
 import PropTypes from 'prop-types'
 import { useStateValue } from "./StateProvider";
+import { Link } from "react-router-dom";
+import axios from "axios";
 const Product = ({id , title, price ,symbol, image, rating}) => {
 
   const [{basket, user}, dispatch] = useStateValue()
 
-  console.log('this is the basket===>', basket )
-  console.log('this is the user===>', user )
+       /// add to database to users cart only;
+       const headers = {
+        // Specify the headers you want to set
+        "Authorization": `Bearer ${user?.token}`, // Example authorization header
+        "Content-Type": "application/json", // Example content type header
+        // Add more headers as needed
+      };
+
+       const cart= async()=>{
+             const response = await axios.post(`/users/${user?.id}/cart`, {
+              productId : id 
+             }, {headers})
+             console.log(response.data.data)
+       }
+
+ 
     const addToBasket = () =>{
+
+        // console.log(user.id)
+        cart()
       //dispatch the item the data layer
       dispatch({
         type : "ADD_TO_BASKET",
@@ -37,10 +56,13 @@ const Product = ({id , title, price ,symbol, image, rating}) => {
         </div>
         </div>
 
-        <img
+         <Link to = {`/products/${id}`}>
+         <img className="img"
           src={image}
           alt=""
         />
+         
+         </Link>
         <button onClick={addToBasket}>Add to Basket</button>
     </div>
   );

@@ -20,10 +20,7 @@ function Checkout() {
            <h2 className='checkout__title'>
            Your Shopping basket 
            </h2>
-          
-            {/* <CheckoutProduct key = {1}  id = {1}  title= {"lorem34 hey there"} image = {"https://images-eu.ssl-images-amazon.com/images/G/31/img22/Electronics/Clearance/Clearance_store_Desktop_CC_1x._SY304_CB628315133_.jpg"} price ={ "100"} rating = {5}  /> */}
-            {/* <CheckoutProduct key = {1}  id = {1}  title= {"lorem34 hey there"} image = {"https://images-eu.ssl-images-amazon.com/images/G/31/img22/Electronics/Clearance/Clearance_store_Desktop_CC_1x._SY304_CB628315133_.jpg"} price ={ "100"} rating = {5}  /> */}
-               
+ 
        
                {basket.map(item=>(
             <CheckoutProduct key = {Math.floor(Math.random()*10000)}  id = {item.id}  title= {item.title} image = {item.image} price ={item.price} rating = {item.rating} />

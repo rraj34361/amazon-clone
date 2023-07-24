@@ -14,6 +14,7 @@ const reducer = (state, action)=>{
     let newBasket = [...state.basket]
     switch(action.type){
         case "ADD_TO_BASKET":
+            // console.log(state.user)
             return {
                 ...state,
                 basket : [...state.basket, action.item]

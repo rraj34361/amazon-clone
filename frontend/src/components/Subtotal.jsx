@@ -4,11 +4,15 @@ import CurrencyFormat from 'react-currency-format'
 import { getBasketTotal } from '../reducer'
 import { useNavigate } from 'react-router-dom'
 const Subtotal = () => {
-  const [{basket}, dispatch] = useStateValue()
+  const [{basket , user}, dispatch] = useStateValue()
  const navigate = useNavigate()
 
  const handleNav = ()=>{
-  navigate("/payment")
+    if(user){
+      navigate("/payment")
+    }else{
+      navigate('/login')
+    }
  }
 
   return (

@@ -35,7 +35,7 @@ const Subtotal = () => {
         value={getBasketTotal(basket)}     //home  work
         displayType= {'text'}
         thousandSeparator = { true}
-        prefix={"$"}
+        prefix={"₹"}
         />   
         <button onClick={handleNav} >Procced to checkout </button>
     </div>

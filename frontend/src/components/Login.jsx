@@ -1,11 +1,11 @@
  import { Link, useNavigate } from 'react-router-dom'
 import './Login.css'
 import { useState } from 'react'
-// import { auth } from '../firebase'
+ 
 import axios from '../../axios.config'
 import { useStateValue } from './StateProvider'
 
-const Login = () => {
+const Login = ({hello}) => {
     const [email , setEmail] = useState('')
     const [password , setPassword] = useState('')
     const [{user }, dispatch] = useStateValue()
@@ -27,6 +27,8 @@ const Login = () => {
 
     console.log(response.data.data)
        localStorage.setItem('token', response.data.data.token)
+       let token =  localStorage.getItem('token')
+       hello(token)
        navigate('/')
 
     }

@@ -4,8 +4,9 @@ import Header from './Header'
 import './Home.css'
 import Product from './Product'
 import axios from '../../axios.config'
-import Slider from 'react-slick'
+// import Slider from 'react-slick'
 import Footer from './Footer'
+ 
 
 
 
@@ -39,6 +40,10 @@ const getProduct = async ()=>{
       <div className='home'>
         <div className="home__container">
              
+
+ 
+
+
           
       {/* Add your carousel slides here */}
       <div>
@@ -57,18 +62,18 @@ const getProduct = async ()=>{
         
               
                 <div className="home__row">
-                    <Product id = {list[0]?._id} price = {list[0]?.price} symbol={"$"} title={list[0]?.title}  image= { list[0]?.productImage} rating = {list[0]?.rating}/>
-                    <Product id = {list[0]?._id} price = {list[0]?.price} symbol={"$"} title={list[0]?.title}  image= { list[0]?.productImage} rating = {list[0]?.rating}/>
+                    <Product id = {list[0]?._id} price = {list[0]?.price} symbol={"₹"} title={list[0]?.title}  image= { list[0]?.productImage} rating = {list[0]?.rating}/>
+                    <Product id = {list[1]?._id} price = {list[1]?.price} symbol={"₹"} title={list[1]?.title}  image= { list[1]?.productImage} rating = {list[1]?.rating}/>
                  {/* <Product id = {"54534"} price = {99.09} symbol={"$"} title={"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis architecto, exercitationem perferendis aut dolor magnam tenetur illum neque animi placeat iure consectetur eveniet amet, consequatur cumque veniam blanditiis incidunt illo."}  image= {"https://images-eu.ssl-images-amazon.com/images/G/31/IMG15/Irfan/GATEWAY/MSO/Appliances-QC-PC-186x116--B07G5J5FYP._SY116_CB667322346_.jpg"} rating = {6}/> */}
                 </div>
                 <div className="home__row">
-                <Product id = {list[1]?._id} price = {list[1]?.price} symbol={"$"} title={list[1]?.title}  image= { list[1]?.productImage} rating = {list[1]?.rating}/>
-                <Product id = {list[0]?._id} price = {list[0]?.price} symbol={"$"} title={list[0]?.title}  image= { list[0]?.productImage} rating = {list[0]?.rating}/>
-                <Product id = {list[0]?._id} price = {list[0]?.price} symbol={"$"} title={list[0]?.title}  image= { list[0]?.productImage} rating = {list[0]?.rating}/>
+                <Product id = {list[2]?._id} price = {list[2]?.price} symbol={"₹"} title={list[2]?.title}  image= { list[2]?.productImage} rating = {list[2]?.rating}/>
+                <Product id = {list[3]?._id} price = {list[3]?.price} symbol={"₹"} title={list[3]?.title}  image= { list[3]?.productImage} rating = {list[3]?.rating}/>
+                <Product id = {list[4]?._id} price = {list[4]?.price} symbol={"₹"} title={list[4]?.title}  image= { list[4]?.productImage} rating = {list[4]?.rating}/>
                 
                 </div>
                 <div className="home__row">
-                 <Product id = {list[0]?._id} price = {list[0]?.price} symbol={"$"} title={list[0]?.title}  image= { list[0]?.productImage} rating = {list[0]?.rating}/>
+                 <Product id = {list[5]?._id} price = {list[5]?.price} symbol={"₹"} title={list[5]?.title}  image= { list[5]?.productImage} rating = {list[5]?.rating}/>
                 </div>
         </div>
     </div> 
@@ -80,12 +85,4 @@ const getProduct = async ()=>{
 export default Home
 
 
-
-
-                 {/* <Product id = {"55384"} price = {99.09} symbol={"$"} title={"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis architecto, exercitationem perferendis aut dolor magnam tenetur illum neque animi placeat iure consectetur eveniet amet, consequatur cumque veniam blanditiis incidunt illo."}  image= {"https://images-eu.ssl-images-amazon.com/images/G/31/IMG15/Irfan/GATEWAY/MSO/Appliances-QC-PC-186x116--B07G5J5FYP._SY116_CB667322346_.jpg"} rating = {6}/> */}
-                    {/* <Product id = {prod?._id} price = {prod} symbol={"$"} title={"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis architecto, exercitationem perferendis aut dolor magnam tenetur illum neque animi placeat iure consectetur eveniet amet, consequatur cumque veniam blanditiis incidunt illo. "}  image= {"https://images-eu.ssl-images-amazon.com/images/G/31/img22/Electronics/Clearance/Clearance_store_Desktop_CC_1x._SY304_CB628315133_.jpg"} rating = {6}/> */}
-                 {/* <Product id = {"7885753"} price = {99.09} symbol={"$"} title={"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis architecto, exercitationem perferendis aut dolor magnam tenetur illum neque animi placeat iure consectetur eveniet amet, consequatur cumque veniam blanditiis incidunt illo."}  image= {"https://images-eu.ssl-images-amazon.com/images/G/31/img22/Fashion/Gateway/BAU/BTF-Refresh/May/PC_WF/WF3-186-116._SY116_CB636048992_.jpg"} rating = {6}/> */}
-
- {/* <Product id = {"545384"} price = {99.09} symbol={"$"} title={"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis architecto, exercitationem perferendis aut dolor magnam tenetur illum neque animi placeat iure consectetur eveniet amet, consequatur cumque veniam blanditiis incidunt illo."}  image= {"https://images-eu.ssl-images-amazon.com/images/G/31/IMG15/Irfan/GATEWAY/MSO/Appliances-QC-PC-186x116--B07G5J5FYP._SY116_CB667322346_.jpg"} rating = {6}/>
-                <Product id = {"745765"} price = {99.09} symbol={"$"} title={"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis architecto, exercitationem perferendis aut dolor magnam tenetur illum neque animi placeat iure consectetur eveniet amet, consequatur cumque veniam blanditiis incidunt illo."}  image= {"https://images-eu.ssl-images-amazon.com/images/G/31/img21/PC/Computers/GW/DBQC/D21343116_IN_CEPC_BAU_GW_graphics_March21_dbqc0.5x_8._SY116_CB655805757_.jpg"} rating = {6}/>
-                <Product id = {"453635"} price = {99.09} symbol={"$"} title={"Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis architecto, exercitationem perferendis aut dolor magnam tenetur illum neque animi placeat iure consectetur eveniet amet, consequatur cumque veniam blanditiis incidunt illo."}  image= {"https://images-eu.ssl-images-amazon.com/images/G/31/img22/Fashion/Gateway/BAU/BTF-Refresh/May/PF_MF/MF-4-186-116._SY116_CB636110853_.jpg"} rating = {6}/> */}
+ 

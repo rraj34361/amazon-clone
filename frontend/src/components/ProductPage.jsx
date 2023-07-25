@@ -5,6 +5,7 @@ import Header from "./Header";
 import "./ProductPage.css";
 import ProductSlider from "./ProductSlider";
 import { useStateValue } from "./StateProvider";
+import Footer from "./Footer";
 
 function ProductPage() {
   const [data, setData] = useState({});
@@ -13,10 +14,32 @@ function ProductPage() {
   
   const [{basket, user}, dispatch] = useStateValue()
 
-  // console.log('this is the basket===>', basket )
-  // console.log('this is the user===>', user )
+
+  
+
+
+
+
+    /// add to database to users cart only;
+    const headers = {
+      // Specify the headers you want to set
+      "Authorization": `Bearer ${user?.token}`, // Example authorization header
+      "Content-Type": "application/json", // Example content type header
+      // Add more headers as needed
+    };
+
+     const cart= async()=>{
+           const response = await axios.post(`/users/${user?.id}/cart`, {
+            productId : productId
+           }, {headers})
+           console.log(response.data.data)
+     }
+
+
+  
     const addToBasket = () =>{
       //dispatch the item the data layer
+      cart()
       dispatch({
         type : "ADD_TO_BASKET",
          item : {
@@ -91,6 +114,7 @@ function ProductPage() {
 
       <div className="slider">
       <ProductSlider />
+      <Footer/>
       </div>
       {/* <ProductSlider/> */}
     </>

@@ -134,7 +134,7 @@ const handleChange =  (e)=>{
                   <div className="payment__priceContainer">
                   <CurrencyFormat
         renderText={(value)=>(
-            <h1>Order Details : {value}</h1>
+            <h1>Order Details : {"₹ " + value}</h1>
   )}
         decimalScale={2}
         value={getBasketTotal(basket)}     //home  work

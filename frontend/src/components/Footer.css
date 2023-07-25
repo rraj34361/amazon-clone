@@ -19,6 +19,9 @@
     position: relative;
     height: auto;
     background-color: #0a090d;
+    /* position: absolute; */
+    bottom: 0;
+
   }
   .footer .col {
     width: 190px;

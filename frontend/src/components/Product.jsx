@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useStateValue } from "./StateProvider";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useEffect } from "react";
 const Product = ({id , title, price ,symbol, image, rating}) => {
 
   const [{basket, user}, dispatch] = useStateValue()
@@ -24,7 +25,7 @@ const Product = ({id , title, price ,symbol, image, rating}) => {
 
  
     const addToBasket = () =>{
-
+         
         // console.log(user.id)
         cart()
       //dispatch the item the data layer
@@ -40,6 +41,14 @@ const Product = ({id , title, price ,symbol, image, rating}) => {
       })
     }
 
+
+    useEffect(()=>{
+      dispatch({
+        type : "SET_USER",
+        user : user
+      })
+    },[])
+ 
 
   return (
     <div className="product">
@@ -69,12 +78,12 @@ const Product = ({id , title, price ,symbol, image, rating}) => {
 };
 
 Product.propTypes = {
-    title : PropTypes.string.isRequired ,
-    price : PropTypes.number.isRequired ,
-    image : PropTypes.string.isRequired ,
-    rating : PropTypes.number.isRequired, 
-    symbol : PropTypes.string.isRequired,
-    id : PropTypes.string.isRequired
+    title : PropTypes.string ,
+    price : PropTypes.number ,
+    image : PropTypes.string ,
+    rating : PropTypes.number, 
+    symbol : PropTypes.string,
+    id : PropTypes.string
 }
 
 export default Product;

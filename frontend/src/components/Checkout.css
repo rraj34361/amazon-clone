@@ -1,7 +1,7 @@
 .checkout__ad{
     width: 100%;
     margin-bottom: 10px;
-    height: 5%;
+    height:  200px;
 }
 
 .checkout{
@@ -16,3 +16,4 @@
     padding: 10px;
     border-bottom: 1px solid lightgray; 
 }
+ 

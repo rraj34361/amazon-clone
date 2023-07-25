@@ -91,8 +91,8 @@ const getOrder = async(req,res)=>{
     try { 
      let orderId = req.params.orderId
      console.log('order Id ' , orderId)
-   let    orderWithProduct = await OrderModel.findById(orderId.toString()).populate('items.productId')
-      console.log(orderWithProduct.items)
+   let    orderWithProduct = await OrderModel.findById(orderId).populate('items.productId')
+      console.log(orderWithProduct?.items)
       return res.send({status : true , order : orderWithProduct.items})
     } catch (error) {
         console.log(error)

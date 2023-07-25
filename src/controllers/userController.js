@@ -111,7 +111,7 @@ const login = async (req, res) => {
   return  res.status(200).send({
     status: true,
     message: "User Login Successfully",
-    data: { userId: user._id, token , name : user.name },
+    data: { id: user._id, token , name : user.name },
   })
   } catch (error) {
     console.log(error.message)
@@ -161,7 +161,7 @@ const updateUser = async (req, res) => {
     const user = await UserModel.findById(id);
         if (!user) {
             return res.status(404).send({ status: false, message: 'User not found' });
-        }
+        } 
         if (data.email) {
           if (!isEmail(data.email)) {
             return res.status(400).send({ status: false, message: 'Please enter valid email' })
@@ -243,6 +243,7 @@ delete (objUser.password)
 
 
 const profile = async (req,res)=>{
+try {
   token = req.headers['token']
     
   decoded = jwt.verify(token, SECRET_KEY)
@@ -256,6 +257,9 @@ const profile = async (req,res)=>{
     }
 
   return res.send({data : person})
+} catch (error) {
+  console.log(error.message)
+}
 }
 
 module.exports = {

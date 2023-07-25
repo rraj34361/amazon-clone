@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Set the base URL for API endpoints
-axios.defaults.baseURL = 'http://localhost:5000';
+axios.defaults.baseURL = 'https://amzone-backend.onrender.com';
 
 // Set default headers (e.g., for authorization, content type)
 axios.defaults.headers.common['Authorization'] = 'Bearer your_auth_token';

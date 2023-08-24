@@ -6,11 +6,11 @@ import "./ProductPage.css";
 import ProductSlider from "./ProductSlider";
 import { useStateValue } from "./StateProvider";
 import Footer from "./Footer";
-
+import Loader from "./Loader";
 function ProductPage() {
   const [data, setData] = useState({});
   const { productId } = useParams();
-
+   const [loader, setLoader] = useState(false)
   
   const [{basket, user}, dispatch] = useStateValue()
 
@@ -54,12 +54,14 @@ function ProductPage() {
 
   useEffect(() => {
     // Use the 'id' parameter to make your Axios call or perform any action
+    setLoader(true)
     axios
       .get(`/products/${productId}`)
       .then((response) => {
         // Handle the response here
         // console.log(response.data.data)
         setData(response.data.data);
+        setLoader(false)
       })
       .catch((error) => {
         console.log(error.message);
@@ -116,7 +118,7 @@ function ProductPage() {
       <ProductSlider />
       <Footer/>
       </div>
-      {/* <ProductSlider/> */}
+      {loader && <Loader/>}
     </>
   );
 }

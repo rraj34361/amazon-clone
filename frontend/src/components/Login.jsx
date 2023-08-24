@@ -4,15 +4,17 @@ import { useState } from 'react'
  
 import axios from '../../axios.config'
 import { useStateValue } from './StateProvider'
+import Loader from './Loader'
 
 const Login = ({hello}) => {
     const [email , setEmail] = useState('')
     const [password , setPassword] = useState('')
+    const [loader,setLoader] = useState(false)
     const [{user }, dispatch] = useStateValue()
     const navigate = useNavigate()
     const signIn = async (e)=>{
     e.preventDefault();
-   
+      setLoader(true)
     let response = await axios.post('/login',{email : email, password : password} ) 
          dispatch(
             {
@@ -24,7 +26,7 @@ const Login = ({hello}) => {
                 }
             }
          )
-
+       setLoader(false)
     console.log(response.data.data)
        localStorage.setItem('token', response.data.data.token)
        let token =  localStorage.getItem('token')
@@ -58,6 +60,7 @@ const Login = ({hello}) => {
 </Link>
     </div>
    </div>
+   {loader && <Loader/>}
    </>
   )
 }

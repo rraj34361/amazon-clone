@@ -2,17 +2,20 @@ import { Link, useNavigate } from 'react-router-dom'
 import './Register.css'
 import { useState } from 'react'
 import axios from '../../axios.config'
+import Loader from './Loader'
 const Register = () => {
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [email , setEmail] = useState('')
     const [password , setPassword] = useState('')
     const navigate = useNavigate()
-     
+     const [loader, setLoader] = useState(false)
     
     const register =async (e)=>{
         e.preventDefault()
+        setLoader(true)
       let response = await axios.post('/register',{email , password, name , phone} ) 
+      setLoader(false)
       navigate('/login')
       console.log(response.data.data)
       
@@ -44,6 +47,7 @@ const Register = () => {
         </p>
      </div>
    </div>
+   {loader && <Loader/>}
    </>
   )
 }

@@ -10,4 +10,4 @@ axios.defaults.headers.post['Content-Type'] = 'application/json';
 // Set a default timeout for requests (in milliseconds)
 axios.defaults.timeout = 5000;
 
-export default axios;
+export default axios; 
